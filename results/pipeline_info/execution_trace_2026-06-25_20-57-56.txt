@@ -1,0 +1,3 @@
+task_id	hash	native_id	process	tag	name	status	exit	submit	module	cpus	memory	attempt	duration	realtime	%cpu	%mem	rss	vmem	peak_rss	peak_vmem	rchar	wchar
+5	38/41a992	6781	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES	sampleID_2a	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES (sampleID_2a)	COMPLETED	0	2026-06-25 20:58:32.300	-	1	1 GB	1	112ms	10ms	114.3%	0.0%	0	0	0	0	195.3 KB	965 B
+8	6e/f54ff0	-	NFCORE_AMPLISEQ:AMPLISEQ:CUTADAPT_WORKFLOW:CUTADAPT_BASIC	sampleID_2a	NFCORE_AMPLISEQ:AMPLISEQ:CUTADAPT_WORKFLOW:CUTADAPT_BASIC (sampleID_2a)	FAILED	-	-	-	4	6 GB	1	-	-	-	-	-	-	-	-	-	-

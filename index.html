@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ampliseq Workflow Evolution</title>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#controls {
+    padding: 10px;
+    background: #eeeeee;
+}
+
+button {
+    padding: 8px 15px;
+    margin-right: 10px;
+}
+
+#commitName {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+svg {
+    width: 100vw;
+    height: calc(100vh - 60px);
+}
+
+line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+circle {
+}
+
+text {
+    font-size: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="controls">
+    <button id="prev">Previous</button>
+    <button id="play">Play Evolution</button>
+    <button id="next">Next</button>
+
+    <span id="commitName">
+        Loading...
+    </span>
+
+    <div id="stats">
+        Added: 0 | Removed: 0
+    </div>
+</div>
+
+<svg></svg>
+
+<script>
+
+const svg = d3.select("svg");
+const container = svg.append("g");
+
+const width = window.innerWidth;
+const height = window.innerHeight - 60;
+
+let commits = [];
+let currentIndex = 0;
+let changes = [];
+
+Promise.all([
+    d3.json("evolution.json"),
+    d3.json("changes.json")
+]).then(([evolutionData, changesData]) => {
+
+    commits = evolutionData.map(
+        d => d.commit + "_graph.json"
+    );
+
+    changes = changesData;
+
+    loadGraph(commits[0]);
+});
+
+function loadGraph(fileName){
+
+    svg.selectAll("*").remove();
+
+    document.getElementById("commitName").innerText = fileName;
+let addedNodes = [];
+let removedNodes = [];
+
+const change = changes.find(
+    c => c.to === fileName
+);
+
+if(change){
+    addedNodes = change.added;
+    removedNodes = change.removed;
+}
+const animationDuration =
+    Math.max(1, addedNodes.length) * 300;
+
+document.getElementById("stats").innerHTML =
+    `Added: ${addedNodes.length} | Removed: ${removedNodes.length}`;
+
+console.log("Current file:", fileName);
+console.log("Added nodes:", addedNodes.length);
+console.log(addedNodes);
+    d3.json(fileName).then(graph => {
+        console.log("FILE:", fileName);
+    	console.log("NODES:", graph.nodes.length);
+    	console.log("LINKS:", graph.links.length);
+        
+	const simulation = d3.forceSimulation(graph.nodes)
+            .force(
+                "link",
+                d3.forceLink(graph.links)
+                    .id(d => d.id)
+                    .distance(450)
+	            .strength(0.5)
+            )
+            .force(
+                "charge",
+                d3.forceManyBody().strength(-800)
+            )
+            .force(
+                "center",
+                d3.forceCenter(width / 2, height * 0.60)
+             )
+             .force(
+                     "collide",
+                      d3.forceCollide(12)
+            );
+              
+const link = svg.append("g")
+    .selectAll("line")
+    .data(graph.links)
+    .enter()
+    .append("line")
+    .style("stroke", "#999")
+    .style("stroke-width", 1);
+
+const node = svg.append("g")
+    .selectAll("circle")
+    .data(graph.nodes)
+    .enter()
+    .append("circle")
+
+    .attr("r", d =>
+        addedNodes.some(
+            n => n.trim() === d.id.trim()
+        ) ? 18 : 10
+    )
+
+    .style("fill", d => {
+
+        const match = addedNodes.some(
+            n => n.trim() === d.id.trim()
+        );
+
+        if(match){
+            console.log("GREEN:", d.id);
+            return "limegreen";
+        }
+
+        return "steelblue";
+    });
+
+             const label = svg.append("g")
+            .selectAll("text")
+	    .style("font-size", "8px")
+            .data(graph.nodes)
+            .enter()
+            .append("text")
+	    .text(d => {
+            const name = d.id.split(":").pop();
+            return name.length > 12
+            ? name.substring(0, 12) + "..."
+            : name;
+      });
+      
+	  simulation.on("tick", () => {
+
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            label
+                .attr("x", d => d.x + 8)
+                .attr("y", d => d.y + 3);
+
+    });
+animateAddedNodes(node, addedNodes);
+
+});
+}
+
+
+
+function animateAddedNodes(node, addedNodes){
+
+    addedNodes.forEach((nodeId, index) => {
+
+        node
+            .filter(d =>
+                d.id.trim() === nodeId.trim()
+            )
+            .style("opacity", 0);
+
+        setTimeout(() => {
+
+            node
+                .filter(d =>
+                    d.id.trim() === nodeId.trim()
+                )
+                .transition()
+                .duration(400)
+                .style("opacity", 1);
+
+        }, index * 300);
+
+    });
+
+}
+document.getElementById("next").onclick = () => {
+
+    if(currentIndex < commits.length - 1){
+
+        currentIndex++;
+
+        loadGraph(
+            commits[currentIndex]
+        );
+    }
+};
+
+document.getElementById("prev").onclick = () => {
+
+    if(currentIndex > 0){
+
+        currentIndex--;
+
+        loadGraph(
+            commits[currentIndex]
+        );
+    }
+};
+
+document.getElementById("play").onclick = () => {
+
+    currentIndex = 0;
+
+    loadGraph(commits[currentIndex]);
+
+    const timer = setInterval(() => {
+
+        currentIndex++;
+
+        if(currentIndex >= commits.length){
+
+            clearInterval(timer);
+            return;
+        }
+
+        loadGraph(commits[currentIndex]);
+
+
+    }, 7000);
+
+};
+
+</script>
+
+</body>
+</html>

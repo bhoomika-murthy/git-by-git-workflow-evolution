@@ -1,0 +1,5 @@
+RENAME_RAW_DATA_FILES:
+  sed: 4.9
+Workflow:
+    nf-core/ampliseq: v2.17.0
+    Nextflow: 26.04.3

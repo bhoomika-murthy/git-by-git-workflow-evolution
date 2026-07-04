@@ -1,0 +1,33 @@
+# ----------------------------
+# Local backups
+# ----------------------------
+
+project_backup_*.tar.gz
+
+progress_backup/
+
+*_backup.*
+
+index_backup.html
+index_before_animation.html
+index_animation_working.html
+index_green_nodes_working.html
+index_play_backup.html
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Nextflow runtime
+.nextflow/
+.nextflow.log*
+
+# Nextflow work directory
+work/
+
+# Temporary files
+*.tmp
+*.swp

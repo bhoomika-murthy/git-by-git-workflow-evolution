@@ -1,0 +1,4 @@
+task_id	hash	native_id	process	tag	name	status	exit	submit	module	cpus	memory	attempt	duration	realtime	%cpu	%mem	rss	vmem	peak_rss	peak_vmem	rchar	wchar
+4	34/228a9d	22679	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES	sampleID_1	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES (sampleID_1)	COMPLETED	0	2026-06-05 11:09:30.706	-	1	1 GB	1	270ms	16ms	96.0%	0.0%	0	0	0	0	195.3 KB	968 B
+7	1f/2fb69f	-	NFCORE_AMPLISEQ:AMPLISEQ:FASTQC	sampleID_1	NFCORE_AMPLISEQ:AMPLISEQ:FASTQC (sampleID_1)	FAILED	-	-	-	4	6 GB	1	-	-	-	-	-	-	-	-	-	-
+5	6d/a8a3ef	22743	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES	sampleID_2a	NFCORE_AMPLISEQ:AMPLISEQ:RENAME_RAW_DATA_FILES (sampleID_2a)	ABORTED	-	2026-06-05 11:09:30.946	-	1	1 GB	1	-	-	-	-	-	-	-	-	-	-

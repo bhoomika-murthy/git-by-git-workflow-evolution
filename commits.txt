@@ -1,0 +1,100 @@
+55f3727e initial template build from nf-core/tools, version 1.1
+d7656d7f Add some dependencies
+296ec853 Add dependencies
+fe816f64 Pretty big env file
+0c93d064 Simple example for Daniel when defining resource usages
+5c6ba066 Add usage help info
+c574cda3 Adding in some testdata
+0ee97c31 Adding in testdata to test profile
+9ccde1c4 Dockerfile should build now!
+a8cbea0f Making CI tests great again
+3a1891e9 Add basic options to nextflow config
+bf04bf1e Adding daniels code in
+0cae6a90 Removed hard-coded calls to Singularity
+0f7cc7ab I/O Handling
+5ec4cb7a Don't need to create directory
+526f4af4 No FastA input
+84bda8fa Cleaning up :-)
+2ed77140 Adding in cutadapt into multiqc
+91d92c4b Cutadapt Trimming process
+a966dd35 Initialize channel differently when q2imported is set to a path
+ab38fda4 Downgrade to QIIME2 2018.6 for Daniels Paper
+58881be0 update usage.md with current parameters
+15dc1560 Some more bugfixes
+725e1fa7 Adding db generation
+bddc3e8f Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+62eb2a4a adjusted table of contents and minor corrections
+02f43b4b remove link to docs/configuration/reference_genomes.md
+158bf8c0 Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+76492389 Demux visualize process
+531eb646 add general short overview what pipeline does and mention central methods
+42d50687 Remove commented out code
+9b267275 Typo fixes
+978e3279 Start working on external python script for dada_trunc_parameter finding
+f7f679a7 Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+7e853d5b Add conf example for classifier
+f78107bf Fix some typos
+2ae69ffd Remove tmp dir calls
+7dc9b464 Add combineTable.r script + correct call in NXF process
+bd709a8c Externalize scripts
+5f75ea63 Externalize R scripts
+eacafd33 add meaningful guidelines to troubleshooting
+b888138a add resource estimates for classifier, dada_single, tree and ancom
+4baeb630 Fixing the combineTable.r script
+cf148352 Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+0b9c234e Add metadataCategoryPairwise.r
+5c0fc48c add brief description of all output files to output.md
+bb2cdb1f Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+9743c141 fix metadataCategoryPairwise.r script #16
+92745c4f Remove metadatacategorypairwise with script
+ed328a9d fix output folders and mention that only data from one sequencing run is processed flawlessly
+ceea67e4 RelativeAbundanceReducedTaxa produces now also table on species level
+8cacea73 correct some typo
+a608b101 Started working on Python script
+1f507deb Merge branch 'dev' of https://github.com/nf-core/rrna-ampliseq into dev
+114a5270 add dada_trunc_parameter.py
+333cc6c0 add count_table_minmax_reads.py to replace bash code in processes alpha_rarefaction and diversity_core
+ee4425b4 add count_table_filter_stats.py that reports statistics for two count tables
+daede913 use bin/count_table_minmax_reads.py to replace bash code in processes alpha_rarefaction and diversity_core #19
+cb6ee079 bin/count_table_filter_stats.py output is now a csv file #18
+bfeaf942 report stats after taxa filtering using bin/count_table_filter_stats.py #18
+81e4de29 Merge pull request #20 from nf-core/dev
+651fabad Lots of profiles, Update to Nextflow 18.10.1
+9995a148 Update environment, linting passes now!
+29918392 Fixing params
+483a039f Make tests great again!
+3fb2132c Fixing some minor issues
+081a3400 Merge pull request #21 from nf-core/dev
+d6e44e3b Get rid of incorrect process descriptions
+4a453fe3 Add back testing data profile
+3e136bd7 Fix workflow manifest version
+dcedbebe Rename a single channel
+cefe8c00 some debugging
+b7250e51 fix typo
+b81fe0cf add info for reference databases
+74730843 remove unused file igenomes.config
+b765af38 Remove all echo true calls
+37bbfdda Multi channel mapping fixes
+6b508478 Fixing channels
+423cad96 fix input regex
+65e333f2 make executable
+057b4da3 fix dada_trunc_parameter, etadata_category_all, metadata_category_pairwise
+557630d8 fix trimming
+411d02e5 fixing trimming and qiime_import #24
+873825c5 fixing qiime_demux_visualize and dada_trunc_parameter
+a71a3324 fixing dada_single, but output remains broken
+a137807e improving published files for qiime_demux_visualize and dada_single
+795ca664 fixing channels
+11da8447 Get rid of prefix for output documentation
+e82087b1 Force taking ncurses from conda-forge and pin it
+ac44b3e7 Minor tweaks to environment to make it run
+84c5e8b2 Nicer tags for fastqc / trimming
+3d96744a No need for symlinking / hardcoding paths
+f5eb0d10 This should fix issues with qt in docker container
+2f5af173 Fix dockerfile
+8b72338a fixing report_filter_stats and improve dada_single output
+17720ce9 introducing metadata channel and fixing barplot
+7151a029 fixing tree and alpha_rarefaction
+563edd83 fixing abundance tables
+7347b259 improving diversity indices and ancom
+06266f22 Use temp directories for qiime2
