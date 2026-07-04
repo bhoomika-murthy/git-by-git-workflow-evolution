@@ -8,6 +8,23 @@ The project analyzes the evolution of scientific workflows across Git repository
 
 The objective is to simplify workflow evolution analysis and reduce the manual effort required to understand changes introduced over a repository's history.
 
+## Evaluated Workflows
+
+The workflow evolution framework was evaluated using multiple nf-core pipelines, including:
+
+- nf-core/ampliseq
+- nf-core/rnaseq
+- nf-core/sarek
+- nf-core/chipseq
+- nf-core/atacseq
+- nf-core/mag
+- nf-core/taxprofiler
+- nf-core/viralrecon
+
+These repositories are not included in this portfolio repository. Users can clone the desired workflow repositories separately and analyze them using the provided scripts.
+
+
+
 ---
 
 ## Motivation
